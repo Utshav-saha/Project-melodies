@@ -1,15 +1,15 @@
 let currentSong = new Audio();
-let currentQueue = []; // Renamed 'songs' to be more descriptive
-let allPlaylists = []; // Will hold all data from playlists.json
+let allPlaylists = []; // Will hold data from playlists.json
+let currentQueue = []; // The current playing queue
 
-// --- NEW: Loads all playlist data from the manifest and displays the cards ---
+// --- Loads all playlist data from the manifest file ---
 async function loadAndDisplayPlaylists() {
     try {
-        const response = await fetch("/songs/playlists.json");
+        const response = await fetch("songs/playlists.json"); // Relative path
         allPlaylists = await response.json();
 
         const cardContainer = document.querySelector(".cardContainer");
-        cardContainer.innerHTML = ""; // Clear any existing cards
+        cardContainer.innerHTML = ""; // Clear existing cards
 
         for (const playlist of allPlaylists) {
             cardContainer.innerHTML += `
@@ -24,13 +24,10 @@ async function loadAndDisplayPlaylists() {
         }
     } catch (error) {
         console.error("Failed to load or parse playlists.json:", error);
-        // Optionally, display an error message to the user on the page
     }
 }
 
-// --- DELETED: The old getSongs() function is no longer needed. ---
-
-// Appends new songs to the UI list and attaches event listeners.
+// Appends new songs to the UI and attaches event listeners.
 function appendSongsToDisplay(songsToAdd) {
     let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0];
 
@@ -83,14 +80,12 @@ async function main() {
     // 2. Initial setup: load the first playlist from our manifest into the queue
     if (allPlaylists.length > 0) {
         const firstPlaylist = allPlaylists[0];
-        // Construct full, absolute URLs for the songs
-        const initialSongs = firstPlaylist.songs.map(songFile => `${location.origin}/songs/${firstPlaylist.folder}/${songFile}`);
+        // **FIX 1:** REMOVED encodeURIComponent to store normal paths with spaces.
+        const initialSongs = firstPlaylist.songs.map(songFile => `songs/${firstPlaylist.folder}/${songFile}`);
         currentQueue.push(...initialSongs);
         appendSongsToDisplay(initialSongs);
-        playMusic(currentQueue[0], true); // Load the first song without playing
+        playMusic(currentQueue[0], true);
     }
-
-    // --- All event listeners are now set up once in main() ---
 
     // Play/pause button
     play.addEventListener("click", () => {
@@ -107,11 +102,11 @@ async function main() {
     Array.from(document.getElementsByClassName("card")).forEach(e => {
         e.addEventListener("click", item => {
             const folderName = item.currentTarget.dataset.folder;
-            // **FIXED TYPO ON THIS LINE**
             const clickedPlaylist = allPlaylists.find(p => p.folder === folderName);
 
             if (clickedPlaylist) {
-                const newSongs = clickedPlaylist.songs.map(songFile => `${location.origin}/songs/${folderName}/${songFile}`);
+                // **FIX 1:** REMOVED encodeURIComponent here as well.
+                const newSongs = clickedPlaylist.songs.map(songFile => `songs/${folderName}/${songFile}`);
                 const isAlreadyAdded = newSongs.every(song => currentQueue.includes(song));
 
                 if (!isAlreadyAdded) {
@@ -139,8 +134,10 @@ async function main() {
 
     // Previous button listener
     previous.addEventListener("click", () => {
+        // **FIX 2:** Decode the browser's URL before comparing.
         const currentSrcDecoded = decodeURIComponent(currentSong.src);
-        let currentIndex = currentQueue.findIndex(song => decodeURIComponent(song) === currentSrcDecoded);
+        let currentIndex = currentQueue.findIndex(song => currentSrcDecoded.endsWith(song));
+        
         if (currentIndex !== -1) {
             let previousIndex = (currentIndex - 1 + currentQueue.length) % currentQueue.length;
             playMusic(currentQueue[previousIndex]);
@@ -149,8 +146,10 @@ async function main() {
 
     // Next button listener
     next.addEventListener("click", () => {
+        // **FIX 2:** Decode the browser's URL before comparing.
         const currentSrcDecoded = decodeURIComponent(currentSong.src);
-        let currentIndex = currentQueue.findIndex(song => decodeURIComponent(song) === currentSrcDecoded);
+        let currentIndex = currentQueue.findIndex(song => currentSrcDecoded.endsWith(song));
+        
         if (currentIndex !== -1) {
             let nextIndex = (currentIndex + 1) % currentQueue.length;
             playMusic(currentQueue[nextIndex]);

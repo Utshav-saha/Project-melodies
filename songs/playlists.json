@@ -3,7 +3,7 @@
         "folder": "Husn",
         "title": "Husn",
         "artist": "Anuv Jain",
-        "cover_path": "/songs/Husn/cover.jpg",
+        "cover_path": "songs/Husn/cover.jpg",
         "songs": [
             "husn.mp3"
         ]
@@ -12,7 +12,7 @@
         "folder": "AgarTumSathHo",
         "title": "Agar Tum Sath Ho",
         "artist": "Arijit Singh, Alka Yagnik",
-        "cover_path": "/songs/AgarTumSathHo/cover.jpg",
+        "cover_path": "songs/AgarTumSathHo/cover.jpg",
         "songs": [
             "agar tum sath ho.mp3"
         ]
@@ -21,7 +21,7 @@
         "folder": "Dekhechi Rupsagore",
         "title": "Dekhechi Rupsagore",
         "artist": "Mahtim Sakib",
-        "cover_path": "/songs/Dekhechi Rupsagore/cover.jpg",
+        "cover_path": "songs/Dekhechi Rupsagore/cover.jpg",
         "songs": [
             "Dekhechi Rupsagore.mp3"
         ]
@@ -30,7 +30,7 @@
         "folder": "Jo Tum Mere Ho",
         "title": "Jo Tum Mere Ho",
         "artist": "Anuv Jain",
-        "cover_path": "/songs/Jo Tum Mere Ho/cover.jpg",
+        "cover_path": "songs/Jo Tum Mere Ho/cover.jpg",
         "songs": [
             "Jo Tum Mere Ho.mp3"
         ]
@@ -39,7 +39,7 @@
         "folder": "Jokhon Porbena Mor Payer Chinho",
         "title": "Jokhon Porbena Mor Payer Chinho",
         "artist": "Lagnajita Chakraborty",
-        "cover_path": "/songs/Jokhon Porbena Mor Payer Chinho/cover.jpg",
+        "cover_path": "songs/Jokhon Porbena Mor Payer Chinho/cover.jpg",
         "songs": [
             "jekhane porbena mor payer chinno.mp3"
         ]
@@ -48,7 +48,7 @@
         "folder": "Majhe Majhe Tobo",
         "title": "Majhe Majhe Tobo",
         "artist": "Prashmita Paul",
-        "cover_path": "/songs/Majhe Majhe Tobo/cover.jpg",
+        "cover_path": "songs/Majhe Majhe Tobo/cover.jpg",
         "songs": [
             "majhe majhe tobo.mp3"
         ]
@@ -57,7 +57,7 @@
         "folder": "Mayabono Biharini",
         "title": "Mayabono Biharini",
         "artist": "Somlata",
-        "cover_path": "/songs/Mayabono Biharini/cover.jpg",
+        "cover_path": "songs/Mayabono Biharini/cover.jpg",
         "songs": [
             "mayabono biharini.mp3"
         ]
