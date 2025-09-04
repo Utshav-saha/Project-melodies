@@ -1,6 +1,6 @@
 let currentSong = new Audio();
-let allPlaylists = []; // Will hold data from playlists.json
-let currentQueue = []; // The current playing queue
+let allPlaylists = []; 
+let currentQueue = []; 
 
 // --- Loads all playlist data from the manifest file ---
 async function loadAndDisplayPlaylists() {
@@ -80,7 +80,6 @@ async function main() {
     // 2. Initial setup: load the first playlist from our manifest into the queue
     if (allPlaylists.length > 0) {
         const firstPlaylist = allPlaylists[0];
-        // **FIX 1:** REMOVED encodeURIComponent to store normal paths with spaces.
         const initialSongs = firstPlaylist.songs.map(songFile => `songs/${firstPlaylist.folder}/${songFile}`);
         currentQueue.push(...initialSongs);
         appendSongsToDisplay(initialSongs);
@@ -105,7 +104,6 @@ async function main() {
             const clickedPlaylist = allPlaylists.find(p => p.folder === folderName);
 
             if (clickedPlaylist) {
-                // **FIX 1:** REMOVED encodeURIComponent here as well.
                 const newSongs = clickedPlaylist.songs.map(songFile => `songs/${folderName}/${songFile}`);
                 const isAlreadyAdded = newSongs.every(song => currentQueue.includes(song));
 
@@ -134,7 +132,6 @@ async function main() {
 
     // Previous button listener
     previous.addEventListener("click", () => {
-        // **FIX 2:** Decode the browser's URL before comparing.
         const currentSrcDecoded = decodeURIComponent(currentSong.src);
         let currentIndex = currentQueue.findIndex(song => currentSrcDecoded.endsWith(song));
         
@@ -146,7 +143,6 @@ async function main() {
 
     // Next button listener
     next.addEventListener("click", () => {
-        // **FIX 2:** Decode the browser's URL before comparing.
         const currentSrcDecoded = decodeURIComponent(currentSong.src);
         let currentIndex = currentQueue.findIndex(song => currentSrcDecoded.endsWith(song));
         
