@@ -1,0 +1,25 @@
+.border{
+    /* border: 2px solid white; */
+    margin: 3px;
+}
+
+.flex{
+    display: flex;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.items-center{
+    align-items: center;
+}
+
+.bg-grey{
+    background-color: #1E1E1E;
+    color: white;
+}
+
+.rounded{
+    border-radius: 10px;
+}
